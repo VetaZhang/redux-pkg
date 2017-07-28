@@ -1,8 +1,12 @@
 {
-  "name": "react-demo",
-  "version": "1.0.0",
+  "name": "redux-pkg",
+  "version": "0.0.2",
   "description": "",
   "main": "dist/bundle.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VetaZhang/redux-pkg"
+  },
   "scripts": {
     "dev": "webpack-dev-server --progress --profile --colors",
     "build": "webpack --config webpack.config.prod.js",
