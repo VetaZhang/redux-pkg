@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -8,7 +9,7 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js',
     libraryTarget: 'umd',
-    library: 'FireballUI',
+    library: 'redux-pkg',
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -20,7 +21,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ["react", "es2015"]
+          presets: ["es2015"]
         },
       }
     ]
@@ -28,6 +29,21 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify('production') }
-    })
+    }),
+    new UglifyJsPlugin({
+      sourceMap: false,
+      parallel: 4,
+      uglifyOptions: {
+        minimize: true,
+        unused: true,
+        ecma: 5,
+        ie8: false,
+        warnings: false,
+        compress: {
+          warnings: false,
+          drop_console: true,
+        },
+      },
+    }),
   ]
 }
